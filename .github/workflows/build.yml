@@ -11,6 +11,9 @@ jobs:
       with:
         fetch-depth: '0'
     - name: Bump version and push tag
+      id: version_bump
       uses: lucasfe/tag_action@master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Get the latest tag
+      run: echo "tag applied -> ${{ steps.version_bump.outputs.tag }}"

@@ -68,6 +68,8 @@ if [ -z "$CURRENT_COMMIT_TAG" ]; then
       "sha": "$GIT_COMMIT"
     }
 EOF
+echo "::set-output name=tag::$NEW_TAG"
 else
     echo "This commit is already tagged as: $CURRENT_COMMIT_TAG"
+    echo "::set-output name=tag::$CURRENT_COMMIT_TAG"
 fi

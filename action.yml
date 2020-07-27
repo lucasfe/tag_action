@@ -1,5 +1,5 @@
-name: 'Version code generator'
-description: 'Generates version codes based on commit count'
+name: 'Tag action'
+description: 'Action to tag commits based on previous tags on the repository'
 author: 'Lucas Ferreira'
 inputs:
   build_number:  # id of input
@@ -7,8 +7,8 @@ inputs:
     required: false
     default: ''
 outputs:
-  version: # id of output
-    description: 'the code generated'
+  tag: # id of output
+    description: 'the tag generated'
 runs:
   using: 'docker'
   image: 'Dockerfile'
