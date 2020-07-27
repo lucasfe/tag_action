@@ -65,7 +65,7 @@ if [ -z "$CURRENT_COMMIT_TAG" ]; then
     -d @- << EOF
     {
       "ref": "refs/tags/$NEW_TAG",
-      "sha": "$commit"
+      "sha": "$GIT_COMMIT"
     }
 EOF
 else
