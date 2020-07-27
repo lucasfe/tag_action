@@ -1,0 +1,20 @@
+name: 'Version code generator'
+description: 'Generates version codes based on commit count'
+author: 'Lucas Ferreira'
+inputs:
+  build_number:  # id of input
+    description: 'Build number to be appended on the tag'
+    required: false
+    default: ''
+outputs:
+  version: # id of output
+    description: 'the code generated'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.build_number }}
+branding:
+    icon: 'tag'  
+    color: 'yellow'
+      
