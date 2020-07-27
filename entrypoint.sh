@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # config
-# source=${SOURCE:-.}
+source=${SOURCE:-.}
 
-# cd ${GITHUB_WORKSPACE}/${source}
+cd ${GITHUB_WORKSPACE}/${source}
 
 #get highest tag number
 VERSION=`git describe --abbrev=0 --tags 2>/dev/null`
