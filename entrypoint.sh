@@ -55,9 +55,19 @@ CURRENT_COMMIT_TAG=`git describe --contains $GIT_COMMIT 2>/dev/null`
 #only tag if no tag already (would be better if the git describe command above could have a silent option)
 if [ -z "$CURRENT_COMMIT_TAG" ]; then
     echo "Updating $VERSION to $NEW_TAG"
-    git tag $NEW_TAG
-    git push --tags
-    echo "Tag created and pushed: $NEW_TAG"
+    # push new tag ref to github
+    dt=$(date '+%Y-%m-%dT%H:%M:%SZ')
+    git_refs_url=$(jq .repository.git_refs_url $GITHUB_EVENT_PATH | tr -d '"' | sed 's/{\/sha}//g')
+    echo "$dt: **pushing tag $NEW_TAG to repo $GITHUB_REPOSITORY"
+
+    curl -s -X POST $git_refs_url \
+    -H "Authorization: token $GITHUB_TOKEN" \
+    -d @- << EOF
+    {
+      "ref": "refs/tags/$NEW_TAG",
+      "sha": "$commit"
+    }
+EOF
 else
     echo "This commit is already tagged as: $CURRENT_COMMIT_TAG"
 fi
